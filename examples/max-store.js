@@ -1,5 +1,5 @@
 class MaxStore {
-  this.values = {}
+  values = {}
 
   setValue (key, value) {
     if (this.values[key] === undefined || this.values[key] <= value) {
