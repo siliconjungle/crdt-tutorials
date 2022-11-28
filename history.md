@@ -37,6 +37,10 @@ It's possible to implement transactions by grouping together a list of changes u
 
 In many applications (text editors, whiteboards, etc), it's useful to be able to undo and redo actions. In a collaborative application, it becomes more complicated to reason about what it means to undo / redo. In most cases I'd suggest having a local undo / redo stack of changes that a particular agent has made. This means that if two agents are changing a document at the same time, they won't undo / redo each others work.
 
+## Snapshots
+
+A snapshot is the state of the world at a particular moment in time. A snapshot is created by applying the history up until that point. It's possible to use snapshots periodically as a method of culling history at the cost of granularity.
+
 ## Optimisations
 
 ### Culling values
@@ -47,5 +51,5 @@ If you don't need to know what value existed in the past, but you need to know i
 
 You need to keep around the versions as long as you'd like to be able to merge things at that point in time. If it suits your purposes you can choose to cull all versions that are not still in use past a certain point in time.
 
-### Compressig history
+### Compressing history
 There are many methods of compressing the history (as it can grow quite large over time), but one of the most effective methods is to run-length encode the history. Often an agent will make many changes in a row without receiving changes from a peer which allows for changes to be compressed to really small sizes.
