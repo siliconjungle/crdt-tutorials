@@ -4,6 +4,20 @@
 export const create = (bits) =>
   new Uint32Array(Math.ceil(bits / 32)).fill(4294967295)
 
+export const createFromBoolList = (bits) => {
+  const bitset = new Uint32Array(Math.ceil(bits.length / 32))
+
+  for (let i = 0; i < bits.length; i++) {
+    if (bits[i]) {
+      const elementIndex = Math.floor(i / 32)
+      const bitIndex = i % 32
+      bitset[elementIndex] = bitset[elementIndex] | (1 << bitIndex)
+    }
+  }
+
+  return bitset
+}
+
 export const clear = (bitset, i) => {
   const elementIndex = Math.floor(i / 32)
   const bitIndex = i % 32
